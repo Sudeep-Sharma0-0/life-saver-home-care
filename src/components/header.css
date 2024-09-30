@@ -1,3 +1,21 @@
+#header {
+  background: url("/images/pashupatinath-opacity.jpg");
+  background-position: 55%;
+  z-index: 5;
+}
+
+#header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(215deg, #4db751, #0b59a0);
+  opacity: .45;
+  z-index: -20;
+}
+
 .nav-link a:hover {
   color: #0b59a0;
 }
@@ -91,9 +109,11 @@
   .menu-btn:checked~#header-links li {
     margin: 0;
   }
+
   .menu-btn:checked~#header-links a {
     transition: all .25s ease-in-out;
   }
+
   .menu-btn:checked~#header-links a:hover {
     color: #88f695;
   }
@@ -106,6 +126,7 @@
     border-bottom: 15px solid #0b59a0;
     position: absolute;
     top: -12px;
+    left: 2rem;
   }
 
   .menu-btn:checked~.menu-icon .navicon {
@@ -123,5 +144,9 @@
   .menu-btn:checked~.menu-icon .navicon:before,
   .menu-btn:checked~.menu-icon .navicon:after {
     top: 0;
+  }
+
+  .menu-btn:checked~.hide {
+    display: none;
   }
 }

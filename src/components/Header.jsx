@@ -5,8 +5,8 @@ import "./header.css";
 
 export default function Header() {
   return (
-    <header className="py-2 px-16 text-xl">
-      <nav className="flex justify-between items-center relative">
+    <header className="py-2 px-16 text-xl" id="header">
+      <nav className="flex justify-around items-center relative">
         <section id="header-logo">
           <Image
             src={logo}
@@ -16,16 +16,16 @@ export default function Header() {
           />
         </section>
         <input className="menu-btn hidden invisible absolute" type="checkbox" id="menu-btn" />
-        <label className="menu-icon hidden invisible absolute" for="menu-btn">
+        <label className="menu-icon hidden invisible absolute" htmlFor="menu-btn">
           <span className="navicon" />
         </label>
-        <section id="header-links">
+        <section id="header-links" className="">
           <ul id="nav-list" className="flex justify-between">
             <li className="nav-link mr-8">
               <Link href="/" className="relative">Home</Link>
             </li>
             <li className="nav-link mx-12">
-              <Link href="/services" className="relative">Services</Link>
+              <Link href="#services" className="relative">Services</Link>
             </li>
             <li className="nav-link ml-8">
               <Link href="/contact" className="relative">Contact</Link></li></ul>

@@ -2,12 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background: #88f695;
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+html, body {
+  overflow-x: hidden;
 }
