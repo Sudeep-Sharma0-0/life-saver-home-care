@@ -1,0 +1,152 @@
+#header {
+  background: url("/images/pashupatinath-opacity.jpg");
+  background-position: 55%;
+  z-index: 5;
+}
+
+#header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(215deg, #4db751, #0b59a0);
+  opacity: .45;
+  z-index: -20;
+}
+
+.nav-link a:hover {
+  color: #0b59a0;
+}
+
+.nav-link a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 4px;
+  background: #0b59a0;
+  transition: .3s ease-in-out;
+  display: block;
+  border-radius: 5px;
+}
+
+.nav-link:hover>a::after {
+  width: 100%;
+}
+
+.header-btn {
+  background: #0b59a0;
+  color: #f9f9f9;
+  border: 1px solid #0b59a0;
+}
+
+.header-btn:hover {
+  opacity: .80;
+  color: #ffffff;
+}
+
+@media screen and (max-width: 880px) {
+  header {
+    padding: 10px !important;
+  }
+
+  #header-links {
+    visibility: hidden;
+    position: absolute;
+    opacity: 0;
+    transition: transform 0.25s ease-in, opacity 0.25s ease-in;
+  }
+
+  .menu-icon {
+    cursor: pointer;
+    user-select: none;
+    visibility: visible;
+    display: flex;
+    position: relative;
+  }
+
+  .navicon {
+    background: #0b59a0;
+    height: 6px;
+    width: 2.5rem;
+    position: relative;
+    border-radius: 15px;
+  }
+
+  .navicon:before {
+    top: 12px;
+  }
+
+  .navicon:after {
+    top: -12px;
+  }
+
+  .navicon:before,
+  .navicon:after {
+    background: #0b59a0;
+    width: 100%;
+    height: 100%;
+    content: '';
+    position: absolute;
+    transition: all .2s ease-out;
+    border-radius: 15px;
+  }
+
+  .menu-btn:checked~#header-links {
+    visibility: visible;
+    position: absolute;
+    bottom: -3rem;
+    background: #0b59a0;
+    color: #f9f9f9;
+    padding: 5px 15px;
+    border-radius: 10px;
+    width: 100% !important;
+    opacity: 1;
+    transform: translateY(.5rem);
+  }
+
+  .menu-btn:checked~#header-links li {
+    margin: 0;
+  }
+
+  .menu-btn:checked~#header-links a {
+    transition: all .25s ease-in-out;
+  }
+
+  .menu-btn:checked~#header-links a:hover {
+    color: #88f695;
+  }
+
+  .menu-btn:checked~#header-links:before {
+    content: "";
+    width: 0;
+    border-right: 15px solid transparent;
+    border-left: 15px solid transparent;
+    border-bottom: 15px solid #0b59a0;
+    position: absolute;
+    top: -12px;
+    left: 2rem;
+  }
+
+  .menu-btn:checked~.menu-icon .navicon {
+    background: transparent;
+  }
+
+  .menu-btn:checked~.menu-icon .navicon:before {
+    transform: rotate(-45deg);
+  }
+
+  .menu-btn:checked~.menu-icon .navicon:after {
+    transform: rotate(45deg);
+  }
+
+  .menu-btn:checked~.menu-icon .navicon:before,
+  .menu-btn:checked~.menu-icon .navicon:after {
+    top: 0;
+  }
+
+  .menu-btn:checked~.hide {
+    display: none;
+  }
+}
