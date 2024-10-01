@@ -25,7 +25,7 @@ export default function Hero() {
         </div>
       </section>
       <section id="hero-image">
-        <div class="img-wrapper">
+        <div className="img-wrapper">
           <Image
             src="/images/hero-banner.jpg"
             width={220}
