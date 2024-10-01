@@ -63,6 +63,7 @@ export default function Services() {
           <Service
             title={service.title}
             image={service.image}
+          key={service.title}
             desc={service.desc} />
         );
       })}
