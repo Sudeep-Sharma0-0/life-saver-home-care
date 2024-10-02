@@ -1,0 +1,33 @@
+#contact {
+  background: linear-gradient(150deg, #0b59a0, #26b290, rgba(77, 183, 81, 1));
+  color: #f9f9f9;
+}
+
+#contact p {
+  color: #cacaca;
+}
+
+.map-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  height: 350px;
+  /* Ensure the map maintains aspect ratio */
+  position: relative;
+}
+
+/* Responsive height for smaller screens */
+@media (min-width: 768px) {
+  .map-container {
+    height: 450px;
+  }
+}
+
+/* Make sure the iframe fills the container */
+.google-map {
+  border: 0;
+  width: 100%;
+  height: 100%;
+}

@@ -2,6 +2,7 @@ import { Fredoka } from "next/font/google";
 import "./reset.css";
 import "./globals.css";
 import Header from "@/components/Header.jsx";
+import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Life Saver Home Care",
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
       <body className={fredoka.className} >
         <Header />
         {children}
+        <Footer />
       </body>
     </html >
   );

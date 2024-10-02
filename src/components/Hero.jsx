@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <div id="hero" className="p-3 flex flex-col-reverse items-center gap-x-16 gap-y-8">
+    <div id="hero" className="w-screen p-3 flex flex-col-reverse items-center gap-x-16 gap-y-8">
       <section id="hero-text" className="flex flex-col gap-y-5">
         <p className="text-center flex flex-col gap-y-1">
           <span className="text-5xl text-center font-semibold">Just like your own.</span>

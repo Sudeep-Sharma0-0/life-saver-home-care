@@ -1,5 +1,5 @@
 #services {
-  background: linear-gradient(135deg, #f9f9f9, #cdebd1, #88f695)
+  background: #f9f9f9;
 }
 
 .service {
@@ -21,7 +21,6 @@ h3::after {
   left: 0;
   right: 0;
   margin: auto;
-  display: block;
   bottom: -10px;
   background: #0b59a0;
   border-radius: 5px;
@@ -40,12 +39,28 @@ h4::after {
   background: #0b59a0;
 }
 
-@media (min-width: 850px) {
+@media (min-width: 800px) {
   #services {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2rem;
   }
+
   h3 {
-    grid-column-start: 1;
-    grid-column-end: 5;
+    grid-column: span 4 / span 4 !important;
+  }
+
+  .service {
+    width: 12rem;
+    height: 14rem;
+    transition: .25s ease;
+    cursor: pointer;
+  }
+
+  .service:hover {
+    transform: scale(1.1);
+  }
+
+  .service:nth-of-type(9) {
+    grid-column: 2 / 3;
   }
 }

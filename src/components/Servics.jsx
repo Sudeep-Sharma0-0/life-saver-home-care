@@ -56,14 +56,14 @@ const services = [
 
 export default function Services() {
   return (
-    <div id="services" className="text-center grid grid-cols-2 auto-rows-max gap-2 p-2">
-      <h3 className="my-6 col-span-2 text-4xl font-medium relative">Our Services</h3>
+    <div id="services" className="text-center grid grid-cols-2 auto-rows-max gap-2 p-1">
+      <h3 className="my-3 col-span-2 text-4xl font-medium relative">Our Services</h3>
       {services.map(service => {
         return (
           <Service
             title={service.title}
             image={service.image}
-          key={service.title}
+            key={service.title}
             desc={service.desc} />
         );
       })}
