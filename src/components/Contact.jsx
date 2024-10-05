@@ -59,26 +59,26 @@ const Contact = () => {
             </p>
           </section>
         </div>
-        <div class="w-full max-w-md lg:max-w-2xl xl:max-w-4xl mx-auto bg-white p-6 shadow-md rounded-lg text-gray-950">
-          <h2 class="text-2xl font-bold mb-4 text-gray-700">Contact Us</h2>
+        <div className="w-full max-w-md lg:max-w-2xl xl:max-w-4xl mx-auto bg-white p-6 shadow-md rounded-lg text-gray-950">
+          <h2 className="text-2xl font-bold mb-4 text-gray-700">Contact Us</h2>
 
           <form>
-            <div class="mb-4">
-              <label class="block text-sm font-medium text-gray-700" for="name">Name</label>
-              <input class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" type="text" id="name" name="name" placeholder="Your name" required />
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700" htmlFor="name">Name</label>
+              <input className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" type="text" id="name" name="name" placeholder="Your name" required />
             </div>
 
-            <div class="mb-4">
-              <label class="block text-sm font-medium text-gray-700" for="email">Email</label>
-              <input class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" type="email" id="email" name="email" placeholder="Your email" required />
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700" htmlFor="email">Email</label>
+              <input className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" type="email" id="email" name="email" placeholder="Your email" required />
             </div>
 
-            <div class="mb-4">
-              <label class="block text-sm font-medium text-gray-700" for="message">Message</label>
-              <textarea class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="message" name="message" rows="4" placeholder="Your message" required></textarea>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700" htmlFor="message">Message</label>
+              <textarea className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="message" name="message" rows="4" placeholder="Your message" required></textarea>
             </div>
 
-            <button type="submit" class="w-full text-white py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Send Message</button>
+            <button type="submit" className="w-full text-white py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Send Message</button>
           </form>
         </div>
 

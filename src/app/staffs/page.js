@@ -62,7 +62,7 @@ const StaffPage = () => {
   };
 
   return (
-    <main className="p-4 h-screen">
+    <main className="p-4 h-full">
       <h1 className="text-2xl font-bold mb-4">Our Staff Members</h1>
 
       <div className="flex flex-col sm:flex-row mb-4 gap-4">
