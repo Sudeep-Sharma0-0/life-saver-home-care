@@ -1,8 +1,9 @@
+import Link from 'next/link';
 import React from 'react';
 
 export default function Footer() {
   return (
-    <footer className="bg-neutral-100 text-center text-neutral-600 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left z-0">
+    <footer className="bg-neutral-100 text-center text-neutral-600 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left">
       <div className="flex items-center justify-center border-b-2 border-neutral-200 p-4 dark:border-neutral-500 lg:justify-between">
         <div className="mr-12 hidden lg:block">
           <span>Get connected with us on social networks:</span>
@@ -88,7 +89,7 @@ export default function Footer() {
             <h6 className="mb-1 flex justify-center font-semibold uppercase md:justify-start">Useful links</h6>
             {['Create Account', 'Apply as a Worker', 'Seek Workers', 'Help'].map((link) => (
               <p className="mb-1" key={link}>
-                <a className="text-neutral-600 dark:text-neutral-200">{link}</a>
+                <Link href={`${link === 'Seek Workers' ? "/staffs" : "/#contact"}`} className="text-neutral-600 dark:text-neutral-200">{link}</Link>
               </p>
             ))}
           </div>
