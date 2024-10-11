@@ -2,26 +2,30 @@
 
 import React, { useState, useEffect } from 'react';
 import StaffList from '@/components/StaffList';
+import { supabase } from '@/lib/supabase';
 
 const StaffPage = () => {
   const [staff, setStaff] = useState([]);
   const [filteredStaff, setFilteredStaff] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortOrder, setSortOrder] = useState('asc'); // 'asc' or 'desc'
-  const [filterExp, setFilterExp] = useState(''); // Example: filtering by experience level
+  const [sortOrder, setSortOrder] = useState('asc');
+  const [filterExp, setFilterExp] = useState('');
 
-  // Simulate fetching from a database
+  // Fetch staff data from Supabase
   useEffect(() => {
     const fetchStaff = async () => {
-      const data = [
-        { name: 'John Doe', qualifications: 'MSc Nursing', experience: 5, photo: '/images/john.jpg' },
-        { name: 'Jane Smith', qualifications: 'BSc Nursing', experience: 3, photo: '/images/jane.jpg' },
-        { name: 'Michael Brown', qualifications: 'Diploma in Care', experience: 8, photo: '/images/michael.jpg' },
-      ];
-      setStaff(data);
-      setFilteredStaff(data); // Initialize with all staff members
+      const { data, error } = await supabase
+        .from('staff-primary') // Replace 'staff' with the actual table name in your database
+        .select('name, experiences, experience_year, qualifications, image'); // Modify columns as per your database schema
+
+      if (error) {
+        console.error('Error fetching staff:', error);
+      } else {
+        setStaff(data);
+        setFilteredStaff(data); // Initialize with all staff members
+      }
     };
-    
+
     fetchStaff();
   }, []);
 
@@ -30,8 +34,7 @@ const StaffPage = () => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
     const filtered = staff.filter((person) =>
-      person.name.toLowerCase().includes(term) ||
-      person.qualifications.toLowerCase().includes(term)
+      person.name.toLowerCase().includes(term)
     );
     setFilteredStaff(filtered);
   };
@@ -40,9 +43,9 @@ const StaffPage = () => {
   const handleSort = () => {
     const sorted = [...filteredStaff].sort((a, b) => {
       if (sortOrder === 'asc') {
-        return a.experience - b.experience;
+        return a.experience_year - b.experience_year;
       }
-      return b.experience - a.experience;
+      return b.experience_year - a.experience_year;
     });
     setFilteredStaff(sorted);
     setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
@@ -51,11 +54,11 @@ const StaffPage = () => {
   // Handle filtering by experience
   const handleFilter = (e) => {
     const exp = e.target.value;
-    setFilterExp(exp);
-    
+    setFilterExp(parseInt(exp)*12);
+
     const filtered = staff.filter((person) => {
       if (exp === '') return true; // No filter applied
-      return person.experience.toString() === exp;
+      return (person.experience_year) === parseInt(exp);
     });
 
     setFilteredStaff(filtered);
