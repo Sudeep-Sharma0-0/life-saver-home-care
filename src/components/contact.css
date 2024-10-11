@@ -1,0 +1,16 @@
+#contact {
+  background: linear-gradient(150deg, #0b59a0, #26b290, rgba(77, 183, 81, 1));
+  color: #f9f9f9;
+}
+
+#contact p {
+  color: #cacaca;
+}
+
+#contact button {
+  background: #0b59a0;
+  transition: .3s ease-in-out;
+}
+#contact button:hover {
+  background: #0b1990;
+}
