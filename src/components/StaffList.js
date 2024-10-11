@@ -7,7 +7,7 @@ const StaffList = ({ staff }) => {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 z-10">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       {staff.map((person, index) => (
         <div key={index} className="p-4 border rounded-lg flex flex-col justify-between items-center shadow-md hover:shadow-lg transition-shadow duration-300">
           <img
