@@ -14,9 +14,10 @@ const StaffPage = () => {
   // Fetch staff data from Supabase
   useEffect(() => {
     const fetchStaff = async () => {
-      const { data, error } = await supabase
-        .from('staff-primary') // Replace 'staff' with the actual table name in your database
-        .select('name, experiences, experience_year, qualifications, image'); // Modify columns as per your database schema
+
+      let { data, error } = await supabase
+        .from('staff_primary')
+        .select('*')
 
       if (error) {
         console.error('Error fetching staff:', error);
@@ -54,7 +55,7 @@ const StaffPage = () => {
   // Handle filtering by experience
   const handleFilter = (e) => {
     const exp = e.target.value;
-    setFilterExp(parseInt(exp)*12);
+    setFilterExp(parseInt(exp) * 12);
 
     const filtered = staff.filter((person) => {
       if (exp === '') return true; // No filter applied

@@ -3,7 +3,7 @@ import React from 'react';
 const StaffList = ({ staff }) => {
   console.log(staff);
   if (staff.length === 0) {
-    return <p>No staff members found.</p>;
+    return <p>Leading Staff Members...</p>;
   }
 
   return (

@@ -14,6 +14,7 @@
   background: linear-gradient(215deg, #4db751, #0b59a0);
   opacity: .45;
   z-index: -20;
+  display: block;
 }
 
 #navbar-default a:hover {
