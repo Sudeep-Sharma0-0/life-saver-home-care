@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation'; // Use next/navigation for navigation
 import { supabase } from '@/lib/supabase'; // Adjust the path to your Supabase client
+import LoadingSpinner from '@/components/Loading';
 
 const ApplicationReviewPage = ({ params }) => {
   const { id } = params;
@@ -13,7 +14,6 @@ const ApplicationReviewPage = ({ params }) => {
   // Fetch the application details based on the id
   useEffect(() => {
     const fetchApplication = async () => {
-      setLoading(true);
       const { data: applicationData, error } = await supabase
         .from('applications')
         .select('*')
@@ -31,7 +31,7 @@ const ApplicationReviewPage = ({ params }) => {
     fetchApplication();
   }, [id]);
 
-  if (loading) return <p className="text-center">Loading application details...</p>;
+  if (loading) return <LoadingSpinner />;
   if (error) return <div className="text-red-500">{error}</div>;
 
   return (
@@ -148,9 +148,33 @@ const ApplicationReviewPage = ({ params }) => {
         <button
           className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition duration-300"
           // Handle accepting the application (implement your logic here)
-          onClick={() => {
-            console.log('Accept Application');
-            // Implement accept logic here, e.g., update the application status
+          onClick={async () => {
+            setLoading(true);
+            const { error: deleteError } = await supabase
+              .from('applications')
+              .delete()
+              .eq('id', application.id);
+
+            if (deleteError) {
+              console.error('Error deleting application:', deleteError.message);
+              setLoading(false);
+              return;
+            }
+
+            const { error: insertError } = await supabase
+              .from('staff_primary')
+              .insert([application]); // Insert the entire application data
+
+            if (insertError) {
+              console.error('Error inserting to staff_primary:', insertError.message);
+              setLoading(false);
+              return;
+            }
+
+            setLoading(false);
+            // Step 4: Optionally, show a success message or refresh the application list
+            alert('Application accepted and added to staff!');
+            router.back();
           }}
         >
           Accept Application

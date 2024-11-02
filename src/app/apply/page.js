@@ -5,6 +5,7 @@ import QualiTab from "@/components/QualiTab";
 import SkillsTab from "@/components/SkillsTab";
 import React, { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
+import LoadingSpinner from "@/components/Loading";
 
 // Save form data to localStorage
 const saveToLocalStorage = (data) => {
@@ -36,7 +37,6 @@ const getFromLocalStorage = () => {
             yearsTo: "",
             degreeType: "",
             qualification: "",
-            certificate: null,
           },
         ],
         skills: [
@@ -57,6 +57,8 @@ const getFromLocalStorage = () => {
         ],
       };
   }
+
+  // Default structure if no local storage data exists
   return {
     openTab: 0,
     personalDetails: {
@@ -74,7 +76,6 @@ const getFromLocalStorage = () => {
         yearsTo: "",
         degreeType: "",
         qualification: "",
-        certificate: null,
       },
     ],
     skills: [
@@ -103,6 +104,7 @@ const ApplicationForm = () => {
   const [currentTab, setCurrentTab] = useState(0);
   const [isFormSaved, setIsFormSaved] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // This effect ensures localStorage is accessed only on the client side
   useEffect(() => {
@@ -126,18 +128,25 @@ const ApplicationForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    handleSave();
 
-    const { name, email, phone, age, gender, image } = formData.personalDetails;
-    if (!name || !email || !phone || !age || !gender || !image) {
+    setIsLoading(true); // Start loading
+
+    const { name, email, phone, age, gender } = formData.personalDetails;
+    if (!name || !email || !phone || !age || !gender) {
       setCurrentTab(0);
+      alert("Please add complete personal details.");
+      setIsLoading(false); // Stop loading
       return;
     }
 
     const qualificationsComplete = formData.qualifications.every((qualification) =>
-      qualification.institution && qualification.yearsTo && qualification.qualification
+      qualification.institution && qualification.yearsTo && qualification.specificQualification && qualification.degreeType
     );
     if (!qualificationsComplete) {
       setCurrentTab(1);
+      alert("Please add qualifications.");
+      setIsLoading(false); // Stop loading
       return;
     }
 
@@ -146,6 +155,8 @@ const ApplicationForm = () => {
     );
     if (!skillsComplete) {
       setCurrentTab(2);
+      alert("Please add skills.");
+      setIsLoading(false); // Stop loading
       return;
     }
 
@@ -154,8 +165,38 @@ const ApplicationForm = () => {
     );
     if (!experienceComplete) {
       setCurrentTab(3);
+      alert("Please add experience.");
+      setIsLoading(false); // Stop loading
       return;
     }
+
+    const file = formData.personalDetails.image;
+    if (file == {}) {
+      setCurrentTab(0);
+      alert("Please add profile picture.");
+      setIsLoading(false); // Stop loading
+      return;
+    }
+    const imageFile = new File(
+      [Uint8Array.from(btoa(file), (m) => m.codePointAt(0))],
+      'filename.png',
+      { type: 'image/png' }
+    );
+    const { data: uploadData, error: uploadError } = await supabase
+      .storage
+      .from('profile_images')
+      .upload(`${Math.floor(Math.random() * 1024)}_${imageFile.name}`, imageFile, {
+        cacheControl: '3600',
+        upsert: false,
+      });
+
+    if (uploadError) {
+      console.error('Error uploading image:', uploadError);
+      setIsLoading(false); // Stop loading
+      return;
+    }
+
+    const publicURL = `https://ufuoxgvmnchdcrfbilii.supabase.co/storage/v1/object/public/profile_images/${uploadData.path}`;
 
     const { data, error } = await supabase
       .from("applications")
@@ -166,7 +207,7 @@ const ApplicationForm = () => {
           phone: formData.personalDetails.phone,
           age: formData.personalDetails.age,
           gender: formData.personalDetails.gender,
-          image: formData.personalDetails.image,
+          image: publicURL || "",
           qualifications: formData.qualifications,
           skills: formData.skills,
           experience: formData.experience,
@@ -174,8 +215,11 @@ const ApplicationForm = () => {
       ])
       .select();
 
+    setIsLoading(false); // Stop loading after submission
+
     if (!data || error) {
-      return "Error! Contact Website Owner!";
+      alert("Error! Contact Website Owner!");
+      return;
     }
 
     alert("Application submitted successfully. Wait for manual review.");
@@ -183,6 +227,7 @@ const ApplicationForm = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-8">
+      {isLoading ? <LoadingSpinner /> : ""}
       {/* Tab Headers */}
       <div className="mb-4 border-b-2 flex flex-col sm:flex-row">
         <div className="sm:hidden mb-4">
