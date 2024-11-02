@@ -1,7 +1,24 @@
-import React from 'react';
+"use client";
+import React, { useState } from 'react';
 import "./contact.css";
 
 const Contact = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Replace with your actual phone number
+    const phoneNumber = '9779761895927';
+    const encodedMessage = `Hello, I want to hire someone. My name is ${name}. Email: ${email}. Message: ${message}`;
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(encodedMessage)}`;
+
+    // Open WhatsApp in a new tab
+    window.open(whatsappUrl, '_blank');
+  };
+
   return (
     <div id="contact" className="mt-3 w-full bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -62,20 +79,20 @@ const Contact = () => {
         <div className="w-full max-w-md lg:max-w-2xl xl:max-w-4xl mx-auto bg-white p-6 shadow-md rounded-lg text-gray-950">
           <h2 className="text-2xl font-bold mb-4 text-gray-700">Contact Us</h2>
 
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700" htmlFor="name">Name</label>
-              <input className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" type="text" id="name" name="name" placeholder="Your name" required />
+              <input onChange={(e) => setName(e.target.value)} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" type="text" id="name" name="name" placeholder="Your name" required />
             </div>
 
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700" htmlFor="email">Email</label>
-              <input className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" type="email" id="email" name="email" placeholder="Your email" required />
+              <input onChange={(e) => setEmail(e.target.value)} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" type="email" id="email" name="email" placeholder="Your email" required />
             </div>
 
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700" htmlFor="message">Message</label>
-              <textarea className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="message" name="message" rows="4" placeholder="Your message" required></textarea>
+              <textarea onChange={(e) => setMessage(e.target.value)} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="message" name="message" rows="4" placeholder="Your message" required></textarea>
             </div>
 
             <button type="submit" className="w-full text-white py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Send Message</button>

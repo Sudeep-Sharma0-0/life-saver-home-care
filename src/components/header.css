@@ -14,11 +14,12 @@
   background: linear-gradient(215deg, #4db751, #0b59a0);
   opacity: .45;
   z-index: -20;
+  display: block;
 }
-
 #navbar-default a:hover {
   color: #0b59a0;
 }
+/*
 
 #navbar-default a::after {
   content: "";
@@ -29,7 +30,7 @@
   transition: .3s ease-in-out;
   display: block;
   border-radius: 5px;
-}
+}*/
 
 @media screen and (min-width: 800px) {
   #navbar-default li:hover>a::after {

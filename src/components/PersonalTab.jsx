@@ -6,11 +6,19 @@ export default function PersonalTab(props) {
     props.setFormData({ ...props.formData, personalDetails: updatedPersonalDetails });
   };
 
-  // Handler for attaching an image file
   const handleFileChange = (field, file) => {
-    const updatedPersonalDetails = props.formData.personalDetails;
-    updatedPersonalDetails[field] = file;
-    props.setFormData({ ...props.formData, personalDetails: updatedPersonalDetails });
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        // Create a shallow copy and update the image with the Base64 string
+        const updatedPersonalDetails = { ...props.formData.personalDetails, [field]: reader.result };
+        props.setFormData({ ...props.formData, personalDetails: updatedPersonalDetails });
+      };
+      reader.onerror = (error) => {
+        console.error("Error reading file:", error);
+      };
+    }
   };
 
   return (
