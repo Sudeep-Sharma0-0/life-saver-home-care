@@ -5,7 +5,7 @@ export default function QualiTab(props) {
       ...props.formData,
       qualifications: [
         ...props.formData.qualifications,
-        { institution: '', yearsFrom: '', yearsTo: '', degreeType: '', qualification: '', certificate: null },
+        { institution: '', yearsFrom: '', yearsTo: '', degreeType: '', qualification: '', specificQualification: '', certificate: null },
       ],
     });
   };
@@ -88,14 +88,34 @@ export default function QualiTab(props) {
           </div>
 
           <div className="mb-4">
-            <label className="block mb-2 font-medium">Qualification <span className="text-red-500">*</span></label>
-            <textarea
+            <label className="block mb-2 font-medium">Specific Qualification <span className="text-red-500">*</span></label>
+            <select
               className="w-full p-2 border rounded-md"
-              value={qualification.qualification}
-              onChange={(e) => handleInputChange(index, 'qualification', e.target.value)}
-              placeholder="Enter the qualification details"
+              value={qualification.specificQualification}
+              onChange={(e) => handleInputChange(index, 'specificQualification', e.target.value)}
               required
-            />
+            >
+              <option value="" disabled selected="selected">Select Qualification</option>
+              <option value="Doctor">Doctor</option>
+              <option value="HA">HA</option>
+              <option value="CMA">CMA</option>
+              <option value="Staff Nurse">Staff Nurse</option>
+              <option value="ANM">ANM</option>
+              <option value="BN Nursing">BN Nursing</option>
+              <option value="Lab Assistant">Lab Assistant</option>
+              <option value="Lab Technician">Lab Technician</option>
+              <option value="D Pharmacy">D Pharmacy</option>
+              <option value="Others">Others</option>
+            </select>
+            {qualification.specificQualification === 'Others' && (
+              <textarea
+                className="w-full p-2 border rounded-md mt-2"
+                value={qualification.qualification}
+                onChange={(e) => handleInputChange(index, 'qualification', e.target.value)}
+                placeholder="Enter the qualification details"
+                required
+              />
+            )}
           </div>
 
           <div className="mb-4">

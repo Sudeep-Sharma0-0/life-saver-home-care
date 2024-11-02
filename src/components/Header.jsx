@@ -68,6 +68,9 @@ export default function Header() {
               <li>
                 <Link href="/#contact" className="text-[#f9f9f9] md:text-black lg:text-black block px-1 py-2 rounded" onClick={closeMenu}>Contact</Link>
               </li>
+              <li>
+                <Link href="/about" className="text-[#f9f9f9] md:text-black lg:text-black block px-1 py-2 rounded" onClick={closeMenu}>About</Link>
+              </li>
             </ul>
           </div>
         </div>

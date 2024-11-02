@@ -1,6 +1,7 @@
 "use client";
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import LoadingSpinner from '@/components/Loading';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -38,6 +39,7 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      {loading ? <LoadingSpinner /> : ""}
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm">
         <h2 className="text-2xl font-bold text-center mb-4">Admin Login</h2>
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
